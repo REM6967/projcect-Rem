@@ -1,67 +1,449 @@
 <!DOCTYPE html>
-<Htme lang="ru">
+<html lang="en">
 <head>
-<title>Surfing.com</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surf Guide - Your Ultimate Surfing Guide</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);   
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--primary);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 50px 0;
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+        
+        /* Surfboard Types Section */
+        .surfboards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .board-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .board-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .board-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .board-info {
+            padding: 20px;
+        }
+        
+        /* Maneuvers Section */
+        .maneuvers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .maneuver-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Wave Types Section */
+        .wave-types {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .wave-card {
+            flex: 1 1 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            margin-bottom: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
-<style>
-img {
-width: 40;
-}
-
-
-ПЕЕЕЕЕЕЕЕЕЕНИИИИИИИС
-
-
-</style>
-
-
-
-</body>
-<b> <pre>WHAT IS SURFING <pre> </b>
-
- <P>
-Surfing - is when  you ride a wave with your board. In surfing we have diffrent types of boards and styles or some other tools 
-maybe somtimes is about sport or as life style
-<b>DIFFRENT TYPES OF SUFBOARDS</b> 
-<tr>
-<tr>shortboard</tr>
-<tr>longboard</tr>роо
-<tr>funboard </tr>
-<tr>skimboard</tr>
-<tr>bodyboard</tr>
- </P>
-<b>If  maybe uf you wnat to stare surfing?</b>
-  You need to know where to stare?
-  How to start? 
-  With who?
-  we can. tell you that later!   
-</pre>. 
-<b>FOR BEGINER</b>
-  You can go to ...
-<b> INTERMIDEUT SIRFER</b>
- You can go ...
-<b> IF U ARE A PRO SURFER  </b>
- u ca go to ... 
-</pre>
-<b> if u have any other qwestions </b>
- you can ask
- <adress>+79210055714</adress>
- <BR>
-<strong>yhgfuyfu </strong>
-<i>orwufhrkhgwi4uhfiu4ri23uhri2uhr
-</i> this is...54
 <body>
-<img src="https://www.surfinglife.com.au/wp-content/uploads/2017/03/SLATER_cestari.jpg" alt="W
-" width="300pX">
-<video src= IMG_8624.MP4 controls ></video>
-<audio src="Tony_Igy_-_Astronomia_14893.mp3" controls ></audio>
-<audio controls>
-      <source src="media\Tony_Igy_-_Astronomia_14893.mp3" 
-      type="audio/mpeg" />
-      <p>your brouzer vant vconnect HTML5</p>
-    </audio>
-<a href="http://ya.ru/">Яндекс</a>
-
-<a href="index первый сайт.html">this link will send u to new place 
-
-   
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Surf Guide</h1>
+            <p>Your ultimate guide to surfing - learn about boards, maneuvers, conditions, and everything you need to know about riding the waves</p>
+            <a href="#surfboards" class="btn">Start Learning</a>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#surfboards">Boards</a></li>
+            <li><a href="#maneuvers">Maneuvers</a></li>
+            <li><a href="#wave-types">Wave Types</a></li>
+            <li><a href="#etiquette">Etiquette</a></li>
+            <li><a href="#gear">Gear</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Surfboard Types Section -->
+        <section id="surfboards">
+            <h2>Surfboard Types</h2>
+            <div class="surfboards">
+                <div class="board-card">
+                    <img src="https://www.sanbah.com/cdn/shop/files/INFERNO72_SPRAY_BLUE-PINK.jpg?v=1745474732&width=1500" width=300
+                     height="450" alt="Smaller Image">
+                    <div class="board-info">
+                        <h3>Shortboard</h3>
+                        <p><strong>Length:</strong> 5'6" to 6'10"</p>
+                        <p><strong>Features:</strong> Pointed nose, narrow shape, 3-5 fins</p>
+                        <p><strong>Best for:</strong> Advanced surfers, quick turns, aerial maneuvers</p>
+                    </div>
+                </div>
+                
+                <div class="board-card">
+                    <img src="https://solidsurf.co/wp-content/uploads/2019/11/IMG_9979.1.png" width="450" height="450" alt="Smaller Image">
+                    <div class="board-info">
+                        <h3>Longboard</h3>
+                        <p><strong>Length:</strong> 8' to 12'</p>
+                        <p><strong>Features:</strong> Round nose, wide shape, single fin</p>
+                        <p><strong>Best for:</strong> Beginners, noseriding, small waves</p>
+                    </div>
+                </div>
+                
+                <div class="board-card">
+                    <img src="https://stewartsurfboards.com/cdn/shop/files/RFS-P-126742a.jpg?v=1751395529&width=500" width="400" height="450" alt="Smaller Image">
+                    <div class="board-info">
+                        <h3>Fish</h3>
+                        <p><strong>Length:</strong> 5' to 6'6"</p>
+                        <p><strong>Features:</strong> Wide swallowtail, twin fins or quad fins (four fins)</p>
+                        <p><strong>Best for:</strong> Small waves, speed generation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Maneuvers Section -->
+        <section id="maneuvers">
+            <h2>Surfing Maneuvers</h2>
+            <div class="maneuvers">
+                <div class="maneuver-card">
+                    <h3>Wipeout</h3>
+                    <p>When a surfer falls off their board, often spectacularly. Common causes include losing balance, hitting sections of the wave, or misjudging maneuvers.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Barrel (Tube)</h3>
+                    <p>The hollow part of a breaking wave where advanced surfers ride inside. Considered the ultimate surfing experience.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Snap</h3>
+                    <p>A sharp, aggressive turn off the top of the wave where the surfer redirects the board downward quickly.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Carve</h3>
+                    <p>A smooth, powerful turn where the surfer uses the rail of the board to change direction.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Cutback</h3>
+                    <p>A maneuver where the surfer turns back toward the breaking part of the wave to regain positioning.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Duck Dive</h3>
+                    <p>Technique to push the board underwater to get past breaking waves when paddling out.</p>
+                </div>
+            </div>
+        </section>
+        
+       <!-- Wave Types Section -->
+<section id="wave-types">
+    <h2>Wave Types</h2>
+    <div class="wave-types">
+        <div class="wave-card">
+            <img src="https://www.yeeew.com/wp-content/uploads/2021/06/Wedge_Drone.jpg"width="1200" height="450" alt="The Wedge beach break" >
+            <h3>Beach Break</h3>
+            <p>Waves breaking over sandy bottoms (example: The Wedge, California, USA)</p>
+            <p><strong>Characteristics:</strong> Shifting peaks, can close out, generally safer for beginners</p>   
+        </div>
+        
+        <div class="wave-card">
+            <img src="https://www.jbaysurfview.com/wp-content/uploads/2016/10/lineup_1953Jbay_July07_Frieden.jpg"width="1200" height="450" alt="Jeffreys Bay point break" >
+            <h3>Point Break</h3>
+            <p>Waves breaking along a point of land (examples: Jeffreys Bay, South Africa and Malibu, California)</p>
+            <p><strong>Characteristics:</strong> Long, predictable rides, consistent shape</p>
+            <!-- Adding another point break image -->
+        
+        <div class="wave-card">
+            <img src="https://lushpalm.com/wp-content/uploads/2016/06/banzai-pipeline-5.webp"width="1200" height="450" alt="Pipeline reef break" >
+            <h3>Reef Break</h3>
+            <p>Waves breaking over coral or rock reef (example: Pipeline, Hawaii - best spot in the world and also the most dangerous)</p>
+            <p><strong>Characteristics:</strong> Powerful, hollow waves, more dangerous due to shallow bottom</p>
+        </div>
+    </div>
+</section>
+        
+        <!-- Etiquette Section -->
+        <section id="etiquette">
+            <h2>Surfing Etiquette</h2>
+            <div class="maneuvers">
+                <div class="maneuver-card">
+                    <h3>Right of Way</h3>
+                    <p>The surfer closest to the peak of the wave has priority. Don't drop in on someone else's wave.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Paddling Out</h3>
+                    <p>Paddle around the breaking waves, not through the lineup where others are surfing.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Respect Locals</h3>
+                    <p>Be respectful at new spots. Observe before paddling out and don't crowd the lineup.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Safety First</h3>
+                    <p>Always use a leash, don't ditch your board near others, and help surfers in trouble.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gear Section -->
+        <section id="gear">
+            <h2>Surfing Gear Guide</h2>
+            <div class="maneuvers">
+                <div class="maneuver-card">
+                    <h3>Wetsuits</h3>
+                    <p>Choose thickness based on water temperature: 3/2mm for warm water, 4/3mm for cool, 5/4mm+ for cold.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Leashes</h3>
+                    <p>Should be about the same length as your board. Thicker for bigger waves.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Wax</h3>
+                    <p>Use basecoat for new boards, then apply top coat. Choose wax based on water temperature.</p>
+                </div>
+                
+                <div class="maneuver-card">
+                    <h3>Fins</h3>
+                    <p>Different setups (single, twin, thruster, quad) affect speed, stability, and maneuverability.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <p>&copy; 2025 Surf guide. All rights reserved.</p>
+            REM IS SIGMA 
+        </div>
+    </footer>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
